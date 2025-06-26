@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lip Balm Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#FF97B7",
+              secondary: "#FFC4D6",
+            },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+      body { font-family: 'Poppins', sans-serif; }
+      .cart-dropdown {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 100%;
+      width: 320px;
+      z-index: 50;
+      }
+      .cart-trigger:hover .cart-dropdown {
+      display: block;
+      }
+      .newsletter-popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 100;
+      }
+      .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 99;
+      }
+    </style>
+  </head>
+  <body class="bg-white">
+    <header
+      class="fixed w-full top-0 bg-white/80 backdrop-blur-md z-50 shadow-sm"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <a href="#" class="font-['Pacifico'] text-2xl text-primary">logo</a>
+          <nav class="hidden md:flex space-x-8">
+            <a href="#" class="text-gray-700 hover:text-primary">Home</a>
+            <a href="#" class="text-gray-700 hover:text-primary">Shop</a>
+            <a href="#" class="text-gray-700 hover:text-primary">About Us</a>
+            <a href="#" class="text-gray-700 hover:text-primary">Contact</a>
+          </nav>
+          <div class="flex items-center space-x-4">
+            <div class="relative cart-trigger cursor-pointer">
+              <div class="w-10 h-10 flex items-center justify-center">
+                <i class="ri-shopping-cart-line text-xl"></i>
+                <span
+                  class="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"
+                  >3</span
+                >
+              </div>
+              <div class="cart-dropdown bg-white rounded shadow-lg p-4">
+                <div class="space-y-4">
+                  <div class="flex items-center gap-4">
+                    <img
+                      src="https://public.readdy.ai/ai/img_res/0bb0e6713d32c237b6bd0e4375246346.jpg"
+                      class="w-20 h-20 object-cover rounded"
+                      alt="Strawberry Dream"
+                    />
+                    <div>
+                      <h4 class="font-medium">Strawberry Dream</h4>
+                      <p class="text-sm text-gray-500">1 × $12.99</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-4">
+                    <img
+                      src="https://public.readdy.ai/ai/img_res/f463efc9f5989ba22b60d077c3988f3b.jpg"
+                      class="w-20 h-20 object-cover rounded"
+                      alt="Fresh Mint"
+                    />
+                    <div>
+                      <h4 class="font-medium">Fresh Mint</h4>
+                      <p class="text-sm text-gray-500">2 × $12.99</p>
+                    </div>
+                  </div>
+                  <div class="border-t pt-4">
+                    <div class="flex justify-between mb-4">
+                      <span>Total:</span>
+                      <span class="font-medium">$38.97</span>
+                    </div>
+                    <button
+                      class="w-full bg-primary text-white py-2 !rounded-button hover:bg-primary/90"
+                    >
+                      Checkout
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="mt-16">
+      <section class="relative overflow-hidden">
+        <div class="absolute inset-0">
+          <img
+            src="https://public.readdy.ai/ai/img_res/8bd346106bb37d5a1a4aceeb4d5fffd1.jpg"
+            class="w-full h-full object-cover"
+            alt="Hero Background"
+          />
+          <div
+            class="absolute inset-0 bg-gradient-to-r from-white/90 to-transparent"
+          ></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h1 class="text-4xl md:text-5xl font-bold mb-6">
+                Nourish Your Lips with Natural Care
+              </h1>
+              <p class="text-gray-600 mb-8">
+                Experience the luxury of our premium lip balms made with natural
+                ingredients. Keep your lips soft, smooth, and healthy all day
+                long.
+              </p>
+              <button
+                class="bg-primary text-white px-8 py-3 !rounded-button hover:bg-primary/90 whitespace-nowrap"
+              >
+                Shop Now
+              </button>
+            </div>
+            <div class="relative">
+              <img
+                src="https://public.readdy.ai/ai/img_res/f632db87fbe54793218af6401233ddab.jpg"
+                class="w-full rounded-xl shadow-lg"
+                alt="Lip Balm Collection"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+      <script>
+        const products = {
+          "lip-balm": [
+            {
+              name: "Strawberry Dream",
+              description: "Sweet and fruity lip care with natural strawberry extract",
+              price: 12.99,
+              color: "Light Pink",
+              image:
+                "https://public.readdy.ai/ai/img_res/d7d1108202b9c6dc302c3cdbcb2d1dfa.jpg",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=fresh ripe strawberry on white background, close up macro shot&width=50&height=50&seq=16&orientation=squarish",
+            },
+            {
+              name: "Sweet Vanilla",
+              description: "Rich vanilla flavor with moisturizing properties",
+              price: 12.99,
+              color: "Off White",
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip balm product photography with vanilla cream packaging on white background, single product with elegant composition&width=400&height=400&seq=6&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=vanilla beans and flower on white background, close up macro shot&width=50&height=50&seq=17&orientation=squarish",
+            },
+            {
+              name: "Black Honey",
+              description: "Deep honey-tinted balm for a natural sheer brown finish",
+              price: 12.99,
+              color: "Sheer Brown",
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip balm product photography with dark amber brown packaging on white background, elegant cosmetic product&width=400&height=400&seq=14&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=dark amber honey drop on white background, close up macro shot&width=50&height=50&seq=18&orientation=squarish",
+            },
+            {
+              name: "Pink Honey",
+              description: "Delicate honey-tinted balm with a rosy sheer finish",
+              price: 12.99,
+              color: "Sheer Pink",
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip balm product photography with rose gold pink packaging on white background, elegant cosmetic product&width=400&height=400&seq=15&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=rose honey drop on white background, close up macro shot with pink tint&width=50&height=50&seq=19&orientation=squarish",
+            },
+          ],
+          "lip-oil": [
+            {
+              name: "Rose Glow Oil",
+              description: "Nourishing rose-infused lip oil for intense hydration",
+              price: 15.99,
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip oil product photography with rose gold packaging and dropper, elegant cosmetic product on white background&width=400&height=400&seq=8&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=pink rose petals with oil drops on white background, close up macro shot&width=50&height=50&seq=20&orientation=squarish",
+            },
+            {
+              name: "Honey Dew Oil",
+              description: "Sweet honey lip oil with vitamin E",
+              price: 15.99,
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip oil product photography with golden honey colored packaging and dropper, elegant cosmetic product on white background&width=400&height=400&seq=9&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=honeydew melon slice with honey drip on white background, close up macro shot&width=50&height=50&seq=21&orientation=squarish",
+            },
+            {
+              name: "Cherry Shine Oil",
+              description: "Cherry-infused lip oil for glossy finish",
+              price: 15.99,
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip oil product photography with cherry red packaging and dropper, elegant cosmetic product on white background&width=400&height=400&seq=10&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=fresh red cherry with water drops on white background, close up macro shot&width=50&height=50&seq=22&orientation=squarish",
+            },
+          ],
+          "lip-tint": [
+            {
+              name: "Coral Crush Tint",
+              description: "Long-lasting coral tint for natural flush",
+              price: 14.99,
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip tint product photography with coral colored packaging, elegant cosmetic product on white background&width=400&height=400&seq=11&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=coral colored flower petals with dew drops on white background, close up macro shot&width=50&height=50&seq=23&orientation=squarish",
+            },
+            {
+              name: "Berry Blush Tint",
+              description: "Deep berry tint for romantic look",
+              price: 14.99,
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip tint product photography with berry colored packaging, elegant cosmetic product on white background&width=400&height=400&seq=12&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=fresh mixed berries with water drops on white background, close up macro shot&width=50&height=50&seq=24&orientation=squarish",
+            },
+            {
+              name: "Peach Perfect Tint",
+              description: "Peachy nude tint for everyday wear",
+              price: 14.99,
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip tint product photography with peach colored packaging, elegant cosmetic product on white background&width=400&height=400&seq=13&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=fresh cut peach slice with dew drops on white background, close up macro shot&width=50&height=50&seq=25&orientation=squarish",
+            },
+          ],
+        };
+        function displayProducts(category) {
+          const productsGrid = document.getElementById("products-grid");
+          productsGrid.innerHTML = "";
+          products[category].forEach((product) => {
+            const productCard = `
+        <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow">
+        <img src="${product.image}" class="w-full h-64 object-cover rounded-lg mb-4" alt="${product.name}">
+        <h3 class="font-semibold text-lg mb-2">${product.name}</h3>
+        <p class="text-gray-600 mb-2">${product.description}</p>
+        <div class="flex items-center mb-4">
+        <div class="w-4 h-4 rounded-full mr-2" style="background-color: ${product.color.toLowerCase()}"></div>
+        <span class="text-sm text-gray-500">${product.color}</span>
+        <img src="${product.flavorImage}" alt="${product.name} flavor" class="w-6 h-6 ml-2 object-cover rounded-full">
+        </div>
+        <div class="flex items-center justify-between">
+        <span class="text-lg font-medium">$${product.price}</span>
+        <button class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-primary/90 whitespace-nowrap">Add to Cart</button>
+        </div>
+        </div>
+        `;
+            productsGrid.insertAdjacentHTML("beforeend", productCard);
+          });
+        }
+        document.querySelectorAll(".category-btn").forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            document.querySelectorAll(".category-btn").forEach((b) => {
+              b.classList.remove("bg-primary", "text-white");
+              b.classList.add("bg-white", "text-gray-700");
+            });
+            e.target.classList.remove("bg-white", "text-gray-700");
+            e.target.classList.add("bg-primary", "text-white");
+            const category = e.target.dataset.category;
+            displayProducts(category);
+          });
+        });
+        displayProducts("lip-balm");
+      </script>
+      <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 class="text-3xl font-bold text-center mb-8">Best Sellers</h2>
+          <div class="flex justify-center space-x-4 mb-12">
+            <button
+              class="category-btn bg-primary text-white px-6 py-2 !rounded-full hover:bg-primary/90 whitespace-nowrap active"
+              data-category="lip-balm"
+            >
+              Lip Balm
+            </button>
+            <button
+              class="category-btn bg-white text-gray-700 px-6 py-2 !rounded-full hover:bg-gray-100 whitespace-nowrap"
+              data-category="lip-oil"
+            >
+              Lip Oil
+            </button>
+            <button
+              class="category-btn bg-white text-gray-700 px-6 py-2 !rounded-full hover:bg-gray-100 whitespace-nowrap"
+              data-category="lip-tint"
+            >
+              Lip Tint
+            </button>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="products-grid">
+            <div
+              class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow"
+            >
+              <img
+                src="https://readdy.ai/api/search-image?query=luxury lip balm product photography with soft pink packaging on white background, single product with elegant composition&width=400&height=400&seq=4&orientation=squarish"
+                class="w-full h-64 object-cover rounded-lg mb-4"
+                alt="Strawberry Dream"
+              />
+              <h3 class="font-semibold text-lg mb-2">Strawberry Dream</h3>
+              <p class="text-gray-600 mb-4">
+                Sweet and fruity lip care with natural strawberry extract
+              </p>
+              <div class="flex items-center justify-between">
+                <span class="text-lg font-medium">$12.99</span>
+                <button
+                  class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-primary/90 whitespace-nowrap"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+            <div
+              class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow"
+            >
+              <img
+                src="https://readdy.ai/api/search-image?query=luxury lip balm product photography with mint green packaging on white background, single product with elegant composition&width=400&height=400&seq=5&orientation=squarish"
+                class="w-full h-64 object-cover rounded-lg mb-4"
+                alt="Fresh Mint"
+              />
+              <h3 class="font-semibold text-lg mb-2">Fresh Mint</h3>
+              <p class="text-gray-600 mb-4">
+                Cooling mint sensation for refreshed lips
+              </p>
+              <div class="flex items-center justify-between">
+                <span class="text-lg font-medium">$12.99</span>
+                <button
+                  class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-primary/90 whitespace-nowrap"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+            <div
+              class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow"
+            >
+              <img
+                src="https://readdy.ai/api/search-image?query=luxury lip balm product photography with vanilla cream packaging on white background, single product with elegant composition&width=400&height=400&seq=6&orientation=squarish"
+                class="w-full h-64 object-cover rounded-lg mb-4"
+                alt="Sweet Vanilla"
+              />
+              <h3 class="font-semibold text-lg mb-2">Sweet Vanilla</h3>
+              <p class="text-gray-600 mb-4">
+                Rich vanilla flavor with moisturizing properties
+              </p>
+              <div class="flex items-center justify-between">
+                <span class="text-lg font-medium">$12.99</span>
+                <button
+                  class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-primary/90 whitespace-nowrap"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <script>
+        const products = {
+          "lip-balm": [
+            {
+              name: "Strawberry Dream",
+              description: "Sweet and fruity lip care with natural strawberry extract",
+              price: 12.99,
+              color: "Light Pink",
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip balm product photography with soft pink packaging and strawberry decoration, elegant cosmetic product on pure white background with soft shadows, professional beauty product shot&width=400&height=400&seq=4&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=fresh ripe strawberry on white background, close up macro shot&width=50&height=50&seq=16&orientation=squarish",
+            },
+            {
+              name: "Sweet Vanilla",
+              description: "Rich vanilla flavor with moisturizing properties",
+              price: 12.99,
+              color: "Off White",
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip balm product photography with vanilla cream packaging on white background, single product with elegant composition&width=400&height=400&seq=6&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=vanilla beans and flower on white background, close up macro shot&width=50&height=50&seq=17&orientation=squarish",
+            },
+            {
+              name: "Black Honey",
+              description: "Deep honey-tinted balm for a natural sheer brown finish",
+              price: 12.99,
+              color: "Sheer Brown",
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip balm product photography with dark amber brown packaging on white background, elegant cosmetic product&width=400&height=400&seq=14&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=dark amber honey drop on white background, close up macro shot&width=50&height=50&seq=18&orientation=squarish",
+            },
+            {
+              name: "Pink Honey",
+              description: "Delicate honey-tinted balm with a rosy sheer finish",
+              price: 12.99,
+              color: "Sheer Pink",
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip balm product photography with rose gold pink packaging on white background, elegant cosmetic product&width=400&height=400&seq=15&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=rose honey drop on white background, close up macro shot with pink tint&width=50&height=50&seq=19&orientation=squarish",
+            },
+          ],
+          "lip-oil": [
+            {
+              name: "Rose Glow Oil",
+              description: "Nourishing rose-infused lip oil for intense hydration",
+              price: 15.99,
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip oil product photography with rose gold packaging and dropper, elegant cosmetic product on white background&width=400&height=400&seq=8&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=pink rose petals with oil drops on white background, close up macro shot&width=50&height=50&seq=20&orientation=squarish",
+            },
+            {
+              name: "Honey Dew Oil",
+              description: "Sweet honey lip oil with vitamin E",
+              price: 15.99,
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip oil product photography with golden honey colored packaging and dropper, elegant cosmetic product on white background&width=400&height=400&seq=9&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=honeydew melon slice with honey drip on white background, close up macro shot&width=50&height=50&seq=21&orientation=squarish",
+            },
+            {
+              name: "Cherry Shine Oil",
+              description: "Cherry-infused lip oil for glossy finish",
+              price: 15.99,
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip oil product photography with cherry red packaging and dropper, elegant cosmetic product on white background&width=400&height=400&seq=10&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=fresh red cherry with water drops on white background, close up macro shot&width=50&height=50&seq=22&orientation=squarish",
+            },
+          ],
+          "lip-tint": [
+            {
+              name: "Coral Crush Tint",
+              description: "Long-lasting coral tint for natural flush",
+              price: 14.99,
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip tint product photography with coral colored packaging, elegant cosmetic product on white background&width=400&height=400&seq=11&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=coral colored flower petals with dew drops on white background, close up macro shot&width=50&height=50&seq=23&orientation=squarish",
+            },
+            {
+              name: "Berry Blush Tint",
+              description: "Deep berry tint for romantic look",
+              price: 14.99,
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip tint product photography with berry colored packaging, elegant cosmetic product on white background&width=400&height=400&seq=12&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=fresh mixed berries with water drops on white background, close up macro shot&width=50&height=50&seq=24&orientation=squarish",
+            },
+            {
+              name: "Peach Perfect Tint",
+              description: "Peachy nude tint for everyday wear",
+              price: 14.99,
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip tint product photography with peach colored packaging, elegant cosmetic product on white background&width=400&height=400&seq=13&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=fresh cut peach slice with dew drops on white background, close up macro shot&width=50&height=50&seq=25&orientation=squarish",
+            },
+          ],
+        };
+        function displayProducts(category) {
+          const productsGrid = document.getElementById("products-grid");
+          productsGrid.innerHTML = "";
+          products[category].forEach((product) => {
+            const productCard = `
+        <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow">
+        <img src="${product.image}" class="w-full h-64 object-cover rounded-lg mb-4" alt="${product.name}">
+        <h3 class="font-semibold text-lg mb-2">${product.name}</h3>
+        <p class="text-gray-600 mb-2">${product.description}</p>
+        <div class="flex items-center mb-4">
+        <div class="w-4 h-4 rounded-full mr-2" style="background-color: ${product.color.toLowerCase()}"></div>
+        <span class="text-sm text-gray-500">${product.color}</span>
+        <img src="${product.flavorImage}" alt="${product.name} flavor" class="w-6 h-6 ml-2 object-cover rounded-full">
+        </div>
+        <div class="flex items-center justify-between">
+        <span class="text-lg font-medium">$${product.price}</span>
+        <button class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-primary/90 whitespace-nowrap">Add to Cart</button>
+        </div>
+        </div>
+        `;
+            productsGrid.insertAdjacentHTML("beforeend", productCard);
+          });
+        }
+        document.querySelectorAll(".category-btn").forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            document.querySelectorAll(".category-btn").forEach((b) => {
+              b.classList.remove("bg-primary", "text-white");
+              b.classList.add("bg-white", "text-gray-700");
+            });
+            e.target.classList.remove("bg-white", "text-gray-700");
+            e.target.classList.add("bg-primary", "text-white");
+            const category = e.target.dataset.category;
+            displayProducts(category);
+          });
+        });
+        displayProducts("lip-balm");
+      </script>
+      <section class="py-16 relative overflow-hidden">
+        <div class="absolute inset-0">
+          <img
+            src="https://public.readdy.ai/ai/img_res/ddfeff60dfc1728fa719c2b6fc49f221.jpg"
+            class="w-full h-full object-cover opacity-50"
+            alt="Features Background"
+          />
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <h2 class="text-3xl font-bold text-center mb-12">Why Choose Us</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div
+              class="bg-white/80 backdrop-blur-sm p-8 rounded-xl text-center transform hover:scale-105 transition-transform"
+            >
+              <div
+                class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4"
+              >
+                <i class="ri-leaf-line text-primary text-3xl"></i>
+              </div>
+              <h3 class="font-semibold text-lg mb-2">Natural Ingredients</h3>
+              <p class="text-gray-600">
+                Made with carefully selected natural ingredients
+              </p>
+            </div>
+            <div
+              class="bg-white/80 backdrop-blur-sm p-8 rounded-xl text-center transform hover:scale-105 transition-transform"
+            >
+              <div
+                class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4"
+              >
+                <i class="ri-heart-line text-primary text-3xl"></i>
+              </div>
+              <h3 class="font-semibold text-lg mb-2">Cruelty Free</h3>
+              <p class="text-gray-600">
+                Never tested on animals, always ethical
+              </p>
+            </div>
+            <div
+              class="bg-white/80 backdrop-blur-sm p-8 rounded-xl text-center transform hover:scale-105 transition-transform"
+            >
+              <div
+                class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4"
+              >
+                <i class="ri-recycle-line text-primary text-3xl"></i>
+              </div>
+              <h3 class="font-semibold text-lg mb-2">Eco-Friendly</h3>
+              <p class="text-gray-600">
+                Sustainable packaging for our environment
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <script>
+        const products = {
+          "lip-balm": [
+            {
+              name: "Strawberry Dream",
+              description: "Sweet and fruity lip care with natural strawberry extract",
+              price: 12.99,
+              color: "Light Pink",
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip balm product photography with soft pink packaging and strawberry decoration, elegant cosmetic product on pure white background with soft shadows, professional beauty product shot&width=400&height=400&seq=4&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=fresh ripe strawberry on white background, close up macro shot&width=50&height=50&seq=16&orientation=squarish",
+            },
+            {
+              name: "Sweet Vanilla",
+              description: "Rich vanilla flavor with moisturizing properties",
+              price: 12.99,
+              color: "Off White",
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip balm product photography with vanilla cream packaging on white background, single product with elegant composition&width=400&height=400&seq=6&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=vanilla beans and flower on white background, close up macro shot&width=50&height=50&seq=17&orientation=squarish",
+            },
+            {
+              name: "Black Honey",
+              description: "Deep honey-tinted balm for a natural sheer brown finish",
+              price: 12.99,
+              color: "Sheer Brown",
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip balm product photography with dark amber brown packaging on white background, elegant cosmetic product&width=400&height=400&seq=14&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=dark amber honey drop on white background, close up macro shot&width=50&height=50&seq=18&orientation=squarish",
+            },
+            {
+              name: "Pink Honey",
+              description: "Delicate honey-tinted balm with a rosy sheer finish",
+              price: 12.99,
+              color: "Sheer Pink",
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip balm product photography with rose gold pink packaging on white background, elegant cosmetic product&width=400&height=400&seq=15&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=rose honey drop on white background, close up macro shot with pink tint&width=50&height=50&seq=19&orientation=squarish",
+            },
+          ],
+          "lip-oil": [
+            {
+              name: "Rose Glow Oil",
+              description: "Nourishing rose-infused lip oil for intense hydration",
+              price: 15.99,
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip oil product photography with rose gold packaging and dropper, elegant cosmetic product on white background&width=400&height=400&seq=8&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=pink rose petals with oil drops on white background, close up macro shot&width=50&height=50&seq=20&orientation=squarish",
+            },
+            {
+              name: "Honey Dew Oil",
+              description: "Sweet honey lip oil with vitamin E",
+              price: 15.99,
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip oil product photography with golden honey colored packaging and dropper, elegant cosmetic product on white background&width=400&height=400&seq=9&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=honeydew melon slice with honey drip on white background, close up macro shot&width=50&height=50&seq=21&orientation=squarish",
+            },
+            {
+              name: "Cherry Shine Oil",
+              description: "Cherry-infused lip oil for glossy finish",
+              price: 15.99,
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip oil product photography with cherry red packaging and dropper, elegant cosmetic product on white background&width=400&height=400&seq=10&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=fresh red cherry with water drops on white background, close up macro shot&width=50&height=50&seq=22&orientation=squarish",
+            },
+          ],
+          "lip-tint": [
+            {
+              name: "Coral Crush Tint",
+              description: "Long-lasting coral tint for natural flush",
+              price: 14.99,
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip tint product photography with coral colored packaging, elegant cosmetic product on white background&width=400&height=400&seq=11&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=coral colored flower petals with dew drops on white background, close up macro shot&width=50&height=50&seq=23&orientation=squarish",
+            },
+            {
+              name: "Berry Blush Tint",
+              description: "Deep berry tint for romantic look",
+              price: 14.99,
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip tint product photography with berry colored packaging, elegant cosmetic product on white background&width=400&height=400&seq=12&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=fresh mixed berries with water drops on white background, close up macro shot&width=50&height=50&seq=24&orientation=squarish",
+            },
+            {
+              name: "Peach Perfect Tint",
+              description: "Peachy nude tint for everyday wear",
+              price: 14.99,
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip tint product photography with peach colored packaging, elegant cosmetic product on white background&width=400&height=400&seq=13&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=fresh cut peach slice with dew drops on white background, close up macro shot&width=50&height=50&seq=25&orientation=squarish",
+            },
+          ],
+        };
+        function displayProducts(category) {
+          const productsGrid = document.getElementById("products-grid");
+          productsGrid.innerHTML = "";
+          products[category].forEach((product) => {
+            const productCard = `
+        <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow">
+        <img src="${product.image}" class="w-full h-64 object-cover rounded-lg mb-4" alt="${product.name}">
+        <h3 class="font-semibold text-lg mb-2">${product.name}</h3>
+        <p class="text-gray-600 mb-2">${product.description}</p>
+        <div class="flex items-center mb-4">
+        <div class="w-4 h-4 rounded-full mr-2" style="background-color: ${product.color.toLowerCase()}"></div>
+        <span class="text-sm text-gray-500">${product.color}</span>
+        <img src="${product.flavorImage}" alt="${product.name} flavor" class="w-6 h-6 ml-2 object-cover rounded-full">
+        </div>
+        <div class="flex items-center justify-between">
+        <span class="text-lg font-medium">$${product.price}</span>
+        <button class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-primary/90 whitespace-nowrap">Add to Cart</button>
+        </div>
+        </div>
+        `;
+            productsGrid.insertAdjacentHTML("beforeend", productCard);
+          });
+        }
+        document.querySelectorAll(".category-btn").forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            document.querySelectorAll(".category-btn").forEach((b) => {
+              b.classList.remove("bg-primary", "text-white");
+              b.classList.add("bg-white", "text-gray-700");
+            });
+            e.target.classList.remove("bg-white", "text-gray-700");
+            e.target.classList.add("bg-primary", "text-white");
+            const category = e.target.dataset.category;
+            displayProducts(category);
+          });
+        });
+        displayProducts("lip-balm");
+      </script>
+      <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+              <img
+                src="https://public.readdy.ai/ai/img_res/bac8e33b3498a3ef6d81d3e852327956.jpg"
+                class="w-full rounded-xl shadow-lg"
+                alt="Our Process"
+              />
+            </div>
+            <div>
+              <h2 class="text-3xl font-bold mb-6">Our Process</h2>
+              <p class="text-gray-600 mb-6">
+                We believe in transparency and quality. Every lip balm is
+                crafted in our state-of-the-art facility using the finest
+                natural ingredients. Our team of experts ensures that each
+                product meets our high standards of excellence.
+              </p>
+              <button
+                class="bg-primary text-white px-8 py-3 !rounded-button hover:bg-primary/90 whitespace-nowrap"
+              >
+                Learn More
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <script>
+        const products = {
+          "lip-balm": [
+            {
+              name: "Strawberry Dream",
+              description: "Sweet and fruity lip care with natural strawberry extract",
+              price: 12.99,
+              color: "Light Pink",
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip balm product photography with soft pink packaging and strawberry decoration, elegant cosmetic product on pure white background with soft shadows, professional beauty product shot&width=400&height=400&seq=4&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=fresh ripe strawberry on white background, close up macro shot&width=50&height=50&seq=16&orientation=squarish",
+            },
+            {
+              name: "Sweet Vanilla",
+              description: "Rich vanilla flavor with moisturizing properties",
+              price: 12.99,
+              color: "Off White",
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip balm product photography with vanilla cream packaging on white background, single product with elegant composition&width=400&height=400&seq=6&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=vanilla beans and flower on white background, close up macro shot&width=50&height=50&seq=17&orientation=squarish",
+            },
+            {
+              name: "Black Honey",
+              description: "Deep honey-tinted balm for a natural sheer brown finish",
+              price: 12.99,
+              color: "Sheer Brown",
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip balm product photography with dark amber brown packaging on white background, elegant cosmetic product&width=400&height=400&seq=14&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=dark amber honey drop on white background, close up macro shot&width=50&height=50&seq=18&orientation=squarish",
+            },
+            {
+              name: "Pink Honey",
+              description: "Delicate honey-tinted balm with a rosy sheer finish",
+              price: 12.99,
+              color: "Sheer Pink",
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip balm product photography with rose gold pink packaging on white background, elegant cosmetic product&width=400&height=400&seq=15&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=rose honey drop on white background, close up macro shot with pink tint&width=50&height=50&seq=19&orientation=squarish",
+            },
+          ],
+          "lip-oil": [
+            {
+              name: "Rose Glow Oil",
+              description: "Nourishing rose-infused lip oil for intense hydration",
+              price: 15.99,
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip oil product photography with rose gold packaging and dropper, elegant cosmetic product on white background&width=400&height=400&seq=8&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=pink rose petals with oil drops on white background, close up macro shot&width=50&height=50&seq=20&orientation=squarish",
+            },
+            {
+              name: "Honey Dew Oil",
+              description: "Sweet honey lip oil with vitamin E",
+              price: 15.99,
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip oil product photography with golden honey colored packaging and dropper, elegant cosmetic product on white background&width=400&height=400&seq=9&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=honeydew melon slice with honey drip on white background, close up macro shot&width=50&height=50&seq=21&orientation=squarish",
+            },
+            {
+              name: "Cherry Shine Oil",
+              description: "Cherry-infused lip oil for glossy finish",
+              price: 15.99,
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip oil product photography with cherry red packaging and dropper, elegant cosmetic product on white background&width=400&height=400&seq=10&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=fresh red cherry with water drops on white background, close up macro shot&width=50&height=50&seq=22&orientation=squarish",
+            },
+          ],
+          "lip-tint": [
+            {
+              name: "Coral Crush Tint",
+              description: "Long-lasting coral tint for natural flush",
+              price: 14.99,
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip tint product photography with coral colored packaging, elegant cosmetic product on white background&width=400&height=400&seq=11&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=coral colored flower petals with dew drops on white background, close up macro shot&width=50&height=50&seq=23&orientation=squarish",
+            },
+            {
+              name: "Berry Blush Tint",
+              description: "Deep berry tint for romantic look",
+              price: 14.99,
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip tint product photography with berry colored packaging, elegant cosmetic product on white background&width=400&height=400&seq=12&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=fresh mixed berries with water drops on white background, close up macro shot&width=50&height=50&seq=24&orientation=squarish",
+            },
+            {
+              name: "Peach Perfect Tint",
+              description: "Peachy nude tint for everyday wear",
+              price: 14.99,
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip tint product photography with peach colored packaging, elegant cosmetic product on white background&width=400&height=400&seq=13&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=fresh cut peach slice with dew drops on white background, close up macro shot&width=50&height=50&seq=25&orientation=squarish",
+            },
+          ],
+        };
+        function displayProducts(category) {
+          const productsGrid = document.getElementById("products-grid");
+          productsGrid.innerHTML = "";
+          products[category].forEach((product) => {
+            const productCard = `
+        <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow">
+        <img src="${product.image}" class="w-full h-64 object-cover rounded-lg mb-4" alt="${product.name}">
+        <h3 class="font-semibold text-lg mb-2">${product.name}</h3>
+        <p class="text-gray-600 mb-2">${product.description}</p>
+        <div class="flex items-center mb-4">
+        <div class="w-4 h-4 rounded-full mr-2" style="background-color: ${product.color.toLowerCase()}"></div>
+        <span class="text-sm text-gray-500">${product.color}</span>
+        <img src="${product.flavorImage}" alt="${product.name} flavor" class="w-6 h-6 ml-2 object-cover rounded-full">
+        </div>
+        <div class="flex items-center justify-between">
+        <span class="text-lg font-medium">$${product.price}</span>
+        <button class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-primary/90 whitespace-nowrap">Add to Cart</button>
+        </div>
+        </div>
+        `;
+            productsGrid.insertAdjacentHTML("beforeend", productCard);
+          });
+        }
+        document.querySelectorAll(".category-btn").forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            document.querySelectorAll(".category-btn").forEach((b) => {
+              b.classList.remove("bg-primary", "text-white");
+              b.classList.add("bg-white", "text-gray-700");
+            });
+            e.target.classList.remove("bg-white", "text-gray-700");
+            e.target.classList.add("bg-primary", "text-white");
+            const category = e.target.dataset.category;
+            displayProducts(category);
+          });
+        });
+        displayProducts("lip-balm");
+      </script>
+      <section class="py-16 relative overflow-hidden">
+        <div class="absolute inset-0">
+          <img
+            src="https://public.readdy.ai/ai/img_res/26feba8e3b7367545d6840917d215947.jpg"
+            class="w-full h-full object-cover opacity-30"
+            alt="Reviews Background"
+          />
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <h2 class="text-3xl font-bold text-center mb-12">Customer Reviews</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+              <div class="flex items-center mb-4">
+                <div class="flex text-yellow-400">
+                  <i class="ri-star-fill"></i>
+                  <i class="ri-star-fill"></i>
+                  <i class="ri-star-fill"></i>
+                  <i class="ri-star-fill"></i>
+                  <i class="ri-star-fill"></i>
+                </div>
+              </div>
+              <p class="text-gray-600 mb-4">
+                "The best lip balm I've ever used! My lips stay moisturized all
+                day long."
+              </p>
+              <p class="font-medium">Emily Richardson</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+              <div class="flex items-center mb-4">
+                <div class="flex text-yellow-400">
+                  <i class="ri-star-fill"></i>
+                  <i class="ri-star-fill"></i>
+                  <i class="ri-star-fill"></i>
+                  <i class="ri-star-fill"></i>
+                  <i class="ri-star-fill"></i>
+                </div>
+              </div>
+              <p class="text-gray-600 mb-4">
+                "Love the natural ingredients and the subtle flavors. Will
+                definitely buy again!"
+              </p>
+              <p class="font-medium">Sarah Thompson</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+              <div class="flex items-center mb-4">
+                <div class="flex text-yellow-400">
+                  <i class="ri-star-fill"></i>
+                  <i class="ri-star-fill"></i>
+                  <i class="ri-star-fill"></i>
+                  <i class="ri-star-fill"></i>
+                  <i class="ri-star-fill"></i>
+                </div>
+              </div>
+              <p class="text-gray-600 mb-4">
+                "Finally found a lip balm that actually works! The packaging is
+                beautiful too."
+              </p>
+              <p class="font-medium">Michael Anderson</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <script>
+        const products = {
+          "lip-balm": [
+            {
+              name: "Strawberry Dream",
+              description: "Sweet and fruity lip care with natural strawberry extract",
+              price: 12.99,
+              color: "Light Pink",
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip balm product photography with soft pink packaging and strawberry decoration, elegant cosmetic product on pure white background with soft shadows, professional beauty product shot&width=400&height=400&seq=4&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=fresh ripe strawberry on white background, close up macro shot&width=50&height=50&seq=16&orientation=squarish",
+            },
+            {
+              name: "Sweet Vanilla",
+              description: "Rich vanilla flavor with moisturizing properties",
+              price: 12.99,
+              color: "Off White",
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip balm product photography with vanilla cream packaging on white background, single product with elegant composition&width=400&height=400&seq=6&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=vanilla beans and flower on white background, close up macro shot&width=50&height=50&seq=17&orientation=squarish",
+            },
+            {
+              name: "Black Honey",
+              description: "Deep honey-tinted balm for a natural sheer brown finish",
+              price: 12.99,
+              color: "Sheer Brown",
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip balm product photography with dark amber brown packaging on white background, elegant cosmetic product&width=400&height=400&seq=14&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=dark amber honey drop on white background, close up macro shot&width=50&height=50&seq=18&orientation=squarish",
+            },
+            {
+              name: "Pink Honey",
+              description: "Delicate honey-tinted balm with a rosy sheer finish",
+              price: 12.99,
+              color: "Sheer Pink",
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip balm product photography with rose gold pink packaging on white background, elegant cosmetic product&width=400&height=400&seq=15&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=rose honey drop on white background, close up macro shot with pink tint&width=50&height=50&seq=19&orientation=squarish",
+            },
+          ],
+          "lip-oil": [
+            {
+              name: "Rose Glow Oil",
+              description: "Nourishing rose-infused lip oil for intense hydration",
+              price: 15.99,
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip oil product photography with rose gold packaging and dropper, elegant cosmetic product on white background&width=400&height=400&seq=8&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=pink rose petals with oil drops on white background, close up macro shot&width=50&height=50&seq=20&orientation=squarish",
+            },
+            {
+              name: "Honey Dew Oil",
+              description: "Sweet honey lip oil with vitamin E",
+              price: 15.99,
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip oil product photography with golden honey colored packaging and dropper, elegant cosmetic product on white background&width=400&height=400&seq=9&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=honeydew melon slice with honey drip on white background, close up macro shot&width=50&height=50&seq=21&orientation=squarish",
+            },
+            {
+              name: "Cherry Shine Oil",
+              description: "Cherry-infused lip oil for glossy finish",
+              price: 15.99,
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip oil product photography with cherry red packaging and dropper, elegant cosmetic product on white background&width=400&height=400&seq=10&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=fresh red cherry with water drops on white background, close up macro shot&width=50&height=50&seq=22&orientation=squarish",
+            },
+          ],
+          "lip-tint": [
+            {
+              name: "Coral Crush Tint",
+              description: "Long-lasting coral tint for natural flush",
+              price: 14.99,
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip tint product photography with coral colored packaging, elegant cosmetic product on white background&width=400&height=400&seq=11&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=coral colored flower petals with dew drops on white background, close up macro shot&width=50&height=50&seq=23&orientation=squarish",
+            },
+            {
+              name: "Berry Blush Tint",
+              description: "Deep berry tint for romantic look",
+              price: 14.99,
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip tint product photography with berry colored packaging, elegant cosmetic product on white background&width=400&height=400&seq=12&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=fresh mixed berries with water drops on white background, close up macro shot&width=50&height=50&seq=24&orientation=squarish",
+            },
+            {
+              name: "Peach Perfect Tint",
+              description: "Peachy nude tint for everyday wear",
+              price: 14.99,
+              image:
+                "https://readdy.ai/api/search-image?query=luxury lip tint product photography with peach colored packaging, elegant cosmetic product on white background&width=400&height=400&seq=13&orientation=squarish",
+              flavorImage:
+                "https://readdy.ai/api/search-image?query=fresh cut peach slice with dew drops on white background, close up macro shot&width=50&height=50&seq=25&orientation=squarish",
+            },
+          ],
+        };
+        function displayProducts(category) {
+          const productsGrid = document.getElementById("products-grid");
+          productsGrid.innerHTML = "";
+          products[category].forEach((product) => {
+            const productCard = `
+        <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow">
+        <img src="${product.image}" class="w-full h-64 object-cover rounded-lg mb-4" alt="${product.name}">
+        <h3 class="font-semibold text-lg mb-2">${product.name}</h3>
+        <p class="text-gray-600 mb-2">${product.description}</p>
+        <div class="flex items-center mb-4">
+        <div class="w-4 h-4 rounded-full mr-2" style="background-color: ${product.color.toLowerCase()}"></div>
+        <span class="text-sm text-gray-500">${product.color}</span>
+        <img src="${product.flavorImage}" alt="${product.name} flavor" class="w-6 h-6 ml-2 object-cover rounded-full">
+        </div>
+        <div class="flex items-center justify-between">
+        <span class="text-lg font-medium">$${product.price}</span>
+        <button class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-primary/90 whitespace-nowrap">Add to Cart</button>
+        </div>
+        </div>
+        `;
+            productsGrid.insertAdjacentHTML("beforeend", productCard);
+          });
+        }
+        document.querySelectorAll(".category-btn").forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            document.querySelectorAll(".category-btn").forEach((b) => {
+              b.classList.remove("bg-primary", "text-white");
+              b.classList.add("bg-white", "text-gray-700");
+            });
+            e.target.classList.remove("bg-white", "text-gray-700");
+            e.target.classList.add("bg-primary", "text-white");
+            const category = e.target.dataset.category;
+            displayProducts(category);
+          });
+        });
+        displayProducts("lip-balm");
+      </script>
+    </main>
+    <footer class="relative overflow-hidden">
+      <div class="absolute inset-0">
+        <img
+          src="https://public.readdy.ai/ai/img_res/89ed826492bad5bf552d59b9ec12256d.jpg"
+          class="w-full h-full object-cover opacity-20"
+          alt="Footer Background"
+        />
+      </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div>
+            <a href="#" class="font-['Pacifico'] text-2xl text-primary">logo</a>
+            <p class="mt-4 text-gray-600">
+              Nourishing your lips naturally since 2020
+            </p>
+          </div>
+          <div>
+            <h3 class="font-semibold mb-4">Quick Links</h3>
+            <ul class="space-y-2">
+              <li>
+                <a href="#" class="text-gray-600 hover:text-primary"
+                  >About Us</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-600 hover:text-primary">Shop</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-600 hover:text-primary">Contact</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-600 hover:text-primary">FAQs</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="font-semibold mb-4">Connect</h3>
+            <div class="flex space-x-4">
+              <a href="#" class="text-gray-600 hover:text-primary">
+                <i class="ri-instagram-line text-xl"></i>
+              </a>
+              <a href="#" class="text-gray-600 hover:text-primary">
+                <i class="ri-facebook-line text-xl"></i>
+              </a>
+              <a href="#" class="text-gray-600 hover:text-primary">
+                <i class="ri-twitter-line text-xl"></i>
+              </a>
+            </div>
+          </div>
+          <div>
+            <h3 class="font-semibold mb-4">Newsletter</h3>
+            <form class="space-y-4" id="newsletterForm">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                class="w-full px-4 py-2 rounded border-gray-200 focus:border-primary focus:ring-primary"
+                required
+              />
+              <button
+                type="submit"
+                class="w-full bg-primary text-white py-2 !rounded-button hover:bg-primary/90 whitespace-nowrap"
+              >
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="border-t mt-12 pt-8 text-center text-gray-600">
+          <p>&copy; 2025 All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+    <div
+      class="newsletter-popup bg-white rounded-lg p-8 max-w-md w-full"
+      id="newsletterPopup"
+    >
+      <div class="text-center">
+        <i class="ri-mail-send-line text-primary text-4xl mb-4"></i>
+        <h3 class="text-xl font-semibold mb-2">Thank you for subscribing!</h3>
+        <p class="text-gray-600 mb-6">
+          You'll be the first to know about our new products and special offers.
+        </p>
+        <button
+          onclick="closeNewsletterPopup()"
+          class="bg-primary text-white px-6 py-2 !rounded-button hover:bg-primary/90 whitespace-nowrap"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+    <div class="overlay" id="overlay"></div>
+    <script>
+      const newsletterForm = document.getElementById("newsletterForm");
+      const newsletterPopup = document.getElementById("newsletterPopup");
+      const overlay = document.getElementById("overlay");
+      newsletterForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        newsletterPopup.style.display = "block";
+        overlay.style.display = "block";
+      });
+      function closeNewsletterPopup() {
+        newsletterPopup.style.display = "none";
+        overlay.style.display = "none";
+        newsletterForm.reset();
+      }
+    </script>
+  </body>
+</html>
