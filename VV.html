@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WhisperToAI - Write Letters You'll Never Send</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+      .font-playfair { font-family: 'Playfair Display', serif; }
+      .font-lato { font-family: 'Lato', sans-serif; }
+      @keyframes blink-placeholder {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+      }
+      .blink-placeholder::placeholder {
+      animation: blink-placeholder 1s ease-in-out 3;
+      }
+      .text-area {
+      background: linear-gradient(to bottom, #fff 29px, #e5e7eb 1px);
+      background-size: 100% 30px;
+      line-height: 30px;
+      }
+      .floating {
+      animation: float 3s ease-in-out infinite;
+      }
+      @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0px); }
+      }
+    </style>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#8B5CF6",
+              secondary: "#E2E8F0",
+              emotion: {
+                love: "#FDA4AF",
+                regret: "#93C5FD",
+                apology: "#86EFAC",
+                goodbye: "#C4B5FD",
+              },
+            },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-white font-lato">
+    <nav
+      class="fixed top-0 w-full bg-white/90 backdrop-blur-sm border-b border-gray-100 z-50"
+    >
+      <div
+        class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between"
+      >
+        <a href="#" class="font-playfair text-2xl font-bold text-gray-900"
+          >WhisperToAI</a
+        >
+        <div class="flex items-center gap-8">
+          <a href="#" id="homeLink" class="text-gray-600 hover:text-gray-900"
+            >Home</a
+          >
+          <a href="#" class="text-gray-600 hover:text-gray-900">Vault</a>
+          <a href="#" class="text-gray-600 hover:text-gray-900">About</a>
+          <button
+            id="writeLetterBtn"
+            class="flex items-center gap-2 bg-primary text-white px-4 py-2 !rounded-button hover:bg-primary/90"
+          >
+            Write a Letter
+            <i class="ri-quill-pen-line"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
+    <main>
+      <section
+        id="writeSection"
+        class="min-h-screen pt-16 relative overflow-hidden"
+        style="background-image: url('https://readdy.ai/api/search-image?query=A%20serene%20and%20ethereal%20background%20with%20soft%20pastel%20colors%2C%20featuring%20gentle%20swirls%20of%20mist%20and%20light.%20The%20image%20shows%20a%20dreamy%20atmosphere%20with%20subtle%20gradients%20transitioning%20from%20soft%20lavender%20to%20pale%20blue%2C%20creating%20a%20peaceful%20and%20calming%20environment.%20The%20composition%20includes%20delicate%2C%20floating%20elements%20that%20suggest%20movement%20and%20tranquility.&width=1920&height=1080&seq=1&orientation=landscape')"
+      >
+        <div class="absolute inset-0 bg-white/80"></div>
+        <div class="max-w-7xl mx-auto px-6 pt-32 relative">
+          <div class="text-center mb-12">
+            <h1 class="font-playfair text-6xl font-bold mb-6 leading-tight">
+              Write Letters You'll<br />Never Need to Send
+            </h1>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+              Release your thoughts into the digital ether. Let our AI transform
+              your words into poetic whispers, forever echoing in our virtual
+              vault.
+            </p>
+          </div>
+          <div class="max-w-3xl mx-auto">
+            <div class="bg-white rounded-lg shadow-xl p-8 mb-8">
+              <div id="emotionButtons" class="flex gap-4 mb-6">
+                <button
+                  class="flex-1 py-3 !rounded-button border-2 border-emotion-love text-emotion-love hover:bg-emotion-love/10"
+                >
+                  Love
+                </button>
+                <button
+                  class="flex-1 py-3 !rounded-button border-2 border-emotion-regret text-emotion-regret hover:bg-emotion-regret/10"
+                >
+                  Regret
+                </button>
+                <button
+                  class="flex-1 py-3 !rounded-button border-2 border-emotion-apology text-emotion-apology hover:bg-emotion-apology/10"
+                >
+                  Apology
+                </button>
+                <button
+                  class="flex-1 py-3 !rounded-button border-2 border-emotion-goodbye text-emotion-goodbye hover:bg-emotion-goodbye/10"
+                >
+                  Goodbye
+                </button>
+              </div>
+              <textarea
+                id="letterTextarea"
+                class="w-full h-64 p-6 text-area border-none focus:ring-0 resize-none"
+                placeholder="Dear..."
+              ></textarea>
+              <div class="flex items-center justify-between mt-6">
+                <div id="charCounter" class="text-sm text-gray-500">
+                  0/1000 characters
+                </div>
+                <button
+                  id="releaseButton"
+                  class="bg-primary text-white px-6 py-3 !rounded-button hover:bg-primary/90 flex items-center gap-2"
+                >
+                  Release to Void
+                  <i class="ri-send-plane-fill"></i>
+                </button>
+              </div>
+              <div
+                id="confirmDialog"
+                class="fixed inset-0 bg-gray-900/50 backdrop-blur-sm hidden items-center justify-center z-50"
+              >
+                <div
+                  class="bg-white rounded-lg shadow-xl max-w-lg w-full mx-4 opacity-0 translate-y-4 transition-all duration-300"
+                >
+                  <div class="p-6">
+                    <h3 class="font-playfair text-2xl font-bold mb-4">
+                      Release Your Whisper
+                    </h3>
+                    <div class="mb-4" id="selectedEmotion"></div>
+                    <div
+                      class="bg-gray-50 rounded p-4 mb-6 max-h-48 overflow-y-auto"
+                      id="letterPreview"
+                    ></div>
+                    <p class="text-gray-600 mb-8">
+                      Are you ready to release this letter into the void?
+                    </p>
+                    <div class="flex gap-4">
+                      <button
+                        id="confirmRelease"
+                        class="flex-1 bg-primary text-white px-6 py-3 !rounded-button hover:bg-primary/90"
+                      >
+                        Release
+                      </button>
+                      <button
+                        id="cancelRelease"
+                        class="flex-1 bg-gray-100 text-gray-600 px-6 py-3 !rounded-button hover:bg-gray-200"
+                      >
+                        Keep Writing
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                id="successToast"
+                class="fixed top-4 right-4 bg-white rounded-lg shadow-lg p-4 flex items-center gap-3 transform translate-x-full transition-all duration-300 z-50"
+              >
+                <span
+                  class="w-8 h-8 flex items-center justify-center rounded-full bg-primary/10"
+                >
+                  <i class="ri-check-line text-primary"></i>
+                </span>
+                <p class="font-medium">
+                  Your whisper has been eternally preserved
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+          <h2 class="font-playfair text-4xl font-bold text-center mb-16">
+            Vault of Whispers
+          </h2>
+          <div class="grid grid-cols-3 gap-6">
+            <div
+              class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow"
+            >
+              <div class="flex items-center gap-3 mb-4">
+                <span
+                  class="w-8 h-8 flex items-center justify-center rounded-full bg-emotion-love/10"
+                >
+                  <i class="ri-heart-line text-emotion-love"></i>
+                </span>
+                <span class="text-sm text-gray-500">June 25, 2025</span>
+              </div>
+              <p class="text-gray-600 line-clamp-4">
+                Dear Sarah, After all these years, I still remember the way your
+                eyes lit up when you talked about your dreams. I hope wherever
+                you are, those dreams have become your reality...
+              </p>
+            </div>
+            <div
+              class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow"
+            >
+              <div class="flex items-center gap-3 mb-4">
+                <span
+                  class="w-8 h-8 flex items-center justify-center rounded-full bg-emotion-regret/10"
+                >
+                  <i class="ri-emotion-sad-line text-emotion-regret"></i>
+                </span>
+                <span class="text-sm text-gray-500">June 26, 2025</span>
+              </div>
+              <p class="text-gray-600 line-clamp-4">
+                To my younger self, I wish I had taken that chance, jumped when
+                the opportunity presented itself. The safety of staying put has
+                its own price...
+              </p>
+            </div>
+            <div
+              class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow"
+            >
+              <div class="flex items-center gap-3 mb-4">
+                <span
+                  class="w-8 h-8 flex items-center justify-center rounded-full bg-emotion-apology/10"
+                >
+                  <i class="ri-emotion-happy-line text-emotion-apology"></i>
+                </span>
+                <span class="text-sm text-gray-500">June 26, 2025</span>
+              </div>
+              <p class="text-gray-600 line-clamp-4">
+                Mom, I'm sorry for all those times I took you for granted. Your
+                quiet strength and endless patience shaped who I am today...
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="bg-gray-900 text-gray-400 py-16">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-4 gap-8">
+          <div>
+            <h3 class="font-playfair text-white text-xl mb-4">WhisperToAI</h3>
+            <p class="text-sm">
+              A safe space for your unspoken words, transformed by AI into
+              eternal whispers.
+            </p>
+          </div>
+          <div>
+            <h4 class="text-white font-bold mb-4">Navigation</h4>
+            <ul class="space-y-2 text-sm">
+              <li><a href="#" class="hover:text-white">Home</a></li>
+              <li><a href="#" class="hover:text-white">Write a Letter</a></li>
+              <li>
+                <a href="#" class="hover:text-white">Vault of Whispers</a>
+              </li>
+              <li><a href="#" class="hover:text-white">About Us</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-white font-bold mb-4">Legal</h4>
+            <ul class="space-y-2 text-sm">
+              <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
+              <li><a href="#" class="hover:text-white">Terms of Service</a></li>
+              <li><a href="#" class="hover:text-white">Cookie Policy</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-white font-bold mb-4">Stay Connected</h4>
+            <div class="flex gap-4">
+              <a
+                href="#"
+                class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700"
+              >
+                <i class="ri-twitter-x-line"></i>
+              </a>
+              <a
+                href="#"
+                class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700"
+              >
+                <i class="ri-instagram-line"></i>
+              </a>
+              <a
+                href="#"
+                class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700"
+              >
+                <i class="ri-linkedin-line"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="border-t border-gray-800 mt-12 pt-8 text-sm text-center">
+          © 2025 WhisperToAI. All rights reserved.
+        </div>
+      </div>
+    </footer>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const textarea = document.getElementById("letterTextarea");
+        const charCount = document.getElementById("charCounter");
+        const writeLetterBtn = document.getElementById("writeLetterBtn");
+        const homeLink = document.getElementById("homeLink");
+        homeLink.addEventListener("click", function (e) {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+        const writeSection = document.getElementById("writeSection");
+        const emotionButtons = document.getElementById("emotionButtons");
+        writeLetterBtn.addEventListener("click", function () {
+          textarea.value = "";
+          charCount.textContent = "0/1000 characters";
+          Array.from(emotionButtons.children).forEach((button) => {
+            button.classList.remove(
+              "bg-emotion-love/10",
+              "bg-emotion-regret/10",
+              "bg-emotion-apology/10",
+              "bg-emotion-goodbye/10",
+            );
+          });
+          writeSection.scrollIntoView({ behavior: "smooth" });
+          setTimeout(() => {
+            textarea.classList.add("blink-placeholder");
+            textarea.focus();
+            setTimeout(() => {
+              textarea.classList.remove("blink-placeholder");
+            }, 3000);
+          }, 800);
+        });
+        const confirmDialog = document.getElementById("confirmDialog");
+        const releaseButton = document.getElementById("releaseButton");
+        const confirmRelease = document.getElementById("confirmRelease");
+        const cancelRelease = document.getElementById("cancelRelease");
+        const successToast = document.getElementById("successToast");
+        const letterPreview = document.getElementById("letterPreview");
+        const selectedEmotion = document.getElementById("selectedEmotion");
+        textarea.addEventListener("input", function () {
+          const length = this.value.length;
+          charCount.textContent = `${length}/1000 characters`;
+        });
+        releaseButton.addEventListener("click", function () {
+          const activeEmotion =
+            document.querySelector(
+              '.border-2[class*="border-emotion-"]:has(+ button:not(.border-2))',
+            ) || document.querySelector('.border-2[class*="border-emotion-"]');
+          const emotionType = activeEmotion
+            ? activeEmotion.textContent
+            : "Unspecified";
+          const emotionClass = activeEmotion
+            ? activeEmotion.className
+                .match(/border-emotion-\w+/)[0]
+                .replace("border-", "")
+            : "";
+          letterPreview.textContent = textarea.value || "Empty letter";
+          selectedEmotion.innerHTML = `
+      <span class="inline-flex items-center gap-2">
+      <span class="w-6 h-6 flex items-center justify-center rounded-full bg-${emotionClass}/10">
+      <i class="ri-heart-line text-${emotionClass}"></i>
+      </span>
+      <span class="text-gray-600">${emotionType}</span>
+      </span>
+      `;
+          confirmDialog.classList.remove("hidden");
+          confirmDialog.classList.add("flex");
+          setTimeout(() => {
+            confirmDialog
+              .querySelector(".bg-white")
+              .classList.remove("opacity-0", "translate-y-4");
+          }, 10);
+        });
+        function hideDialog() {
+          const dialog = confirmDialog.querySelector(".bg-white");
+          dialog.classList.add("opacity-0", "translate-y-4");
+          setTimeout(() => {
+            confirmDialog.classList.remove("flex");
+            confirmDialog.classList.add("hidden");
+          }, 300);
+        }
+        function showSuccessToast() {
+          successToast.classList.remove("translate-x-full");
+          setTimeout(() => {
+            successToast.classList.add("translate-x-full");
+          }, 3000);
+        }
+        confirmRelease.addEventListener("click", function () {
+          hideDialog();
+          showSuccessToast();
+          textarea.value = "";
+          charCount.textContent = "0/1000 characters";
+        });
+        cancelRelease.addEventListener("click", hideDialog);
+        confirmDialog.addEventListener("click", function (e) {
+          if (e.target === confirmDialog) {
+            hideDialog();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
